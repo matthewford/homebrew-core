@@ -1,9 +1,13 @@
 class Rubyfmt < Formula
   desc "Ruby autoformatter"
   homepage "https://github.com/penelopezone/rubyfmt"
-  url "https://github.com/penelopezone/rubyfmt/archive/v0.8.0.tar.gz"
-  sha256 "537bd9ce5d74642012dc21915078878a3aa8e35df4e48b29d40502ec129b51a4"
   license "MIT"
+
+  stable do
+    url "https://github.com/penelopezone/rubyfmt.git",
+    tag:      "v0.8.0",
+    revision: "ed99cc4586a908c97f8b19ed78801342f7aa8512"
+end
 
   bottle do
     sha256 cellar: :any_skip_relocation, arm64_big_sur: "93a5eab5b30e0ff0728557a9f51ce501cc9454fb7c6616b89f5a41d7be96e493"
@@ -15,10 +19,14 @@ class Rubyfmt < Formula
     sha256 cellar: :any_skip_relocation, all:           "ac11feb657dbe095a59e0bbbe1e8adbd8fe5eaa6dd989e36204780697b200e92"
   end
 
+  head do
+    url "https://github.com/penelopezone/rubyfmt.git", branch: "trunk"
+  end
+
   depends_on "rust" => :build
 
   def install
-    system "make", "all"
+    system "make", "release"
     bin.install "target/release/rubyfmt-main" => "rubyfmt"
   end
 
