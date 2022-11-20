@@ -26,6 +26,7 @@ end
   depends_on "rust" => :build
 
   def install
+    mkdir_p prefix/"target/release"
     system "make", "release"
     bin.install "target/release/rubyfmt-main" => "rubyfmt"
   end
